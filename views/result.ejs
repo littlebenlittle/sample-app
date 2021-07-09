@@ -11,11 +11,13 @@
 </head>
 
 <body>
-	<form action="/submit" method="POST">
-		<label for="username">github username</label><br>
-		<input type="text" id="username" name="username" value="littlebenlittle"><br>
-		<input type="submit" value="Submit">
-	</form>
+	<p>user: <%= username %></p>
+	<p>projects:</p>
+	<ul>
+		<% projects.forEach( (projectName) => { %>
+			<%= projectName %>
+		<% }) %>
+	</ul>
 </body>
 
 </html>
