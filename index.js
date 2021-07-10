@@ -1,18 +1,25 @@
 const express = require('express');
 const ejs = require('ejs');
+const axios = require('axios');
 const { Client } = require('pg');
 
-const client = new Client();
 
 async function fetchProjects(username) {
-	console.log(username)
+	const client = new Client();
 	await client.connect();
-	const res = await client.query('SELECT username, projects FROM data WHERE username = $1::text LIMIT 1');
-	const projects = res.rows[0].projects;
-	console.log(projects);
-	// TODO check if username in db
-	// TODO if not, hit gh api and store it into db
-	// TODO return list of projects
+	const res = await client.query('SELECT projects FROM data WHERE username = $1::text LIMIT 1', [username]);
+	let projects;
+	if (res.rows.length > 0) {
+		projects = res.rows[0].projects;
+	} else {
+		const gh_res = await axios.get(`https://api.github.com/users/${username}/repos`)
+		projects = gh_res.data.map(project => {
+			return project.html_url
+		});
+		const pg_res = await client.query('INSERT INTO data (username, projects) VALUES ($1::text, $2::text[])', [username, projects])
+		console.log(pg_res);
+	}
+	return projects;
 }
 
 const app = express();
