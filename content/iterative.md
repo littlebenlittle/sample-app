@@ -35,7 +35,7 @@ while (x <= 7) {
 }
 ```
 
-In this case, we assign the value `0` to an unsigned integer that called `x`. We then confirm that `x` is indeed less than or equal to `7` and begin executing the loop body. We print the value of `x` to STDOUT and increment `x` until `x <= 7` evaluates to `false`.
+In this case, we assign the value `0` to an unsigned integer called `x`. We then confirm that `x` is indeed less than or equal to `7` and begin executing the loop body. We print the value of `x` to STDOUT and increment `x` until `x <= 7` evaluates to `false`.
 
 ```cpp
 // define a file object

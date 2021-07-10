@@ -1,5 +1,5 @@
 
-# Simple Movie Query App
+# Github Project Lister
 
 This App is a submission for the CU Boulder CS Application for TA Interviews Fall 2021.
 
