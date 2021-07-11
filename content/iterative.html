@@ -1,0 +1,85 @@
+<h1>Lesson Plan for Iterative Structures</h1>
+<p>Notionally, iterative structure or &quot;loops&quot; describe an action is that repeated until a condition is met.</p>
+<p>There are many human examples:</p>
+<blockquote>
+<p>Wash your dishes until they are clean
+Jump rope until you've met your target heart rate for 12 minutes
+Pack your bag until all the items are put away</p>
+</blockquote>
+<p>In computer science, however, we are usually working with data</p>
+<blockquote>
+<p>add 1 to the number referenced by x until x is greater than or equal to 7
+take an item from a list until the list is empty
+ask for the next message from a data stream until the stream sends a 'stop' message</p>
+</blockquote>
+<p>There are three looping constructs in <code>c++</code>:</p>
+<ul>
+<li>the <code>while</code> loop</li>
+<li>the <code>do-while</code> loop</li>
+<li>the <code>for</code> loop</li>
+</ul>
+<h3>the <code>while</code> loop</h3>
+<p>The <code>while</code> loop repeats a block of code until its condition evaluates to true.</p>
+<pre><code class="language-cpp">uint x = 0;
+while (x &lt;= 7) {
+	cout &lt;&lt; x;
+	x++;
+}
+</code></pre>
+<p>In this case, we assign the value <code>0</code> to an unsigned integer called <code>x</code>. We then confirm that <code>x</code> is indeed less than or equal to <code>7</code> and begin executing the loop body. We print the value of <code>x</code> to STDOUT and increment <code>x</code> until <code>x &lt;= 7</code> evaluates to <code>false</code>.</p>
+<pre><code class="language-cpp">// define a file object
+ifstream file;
+// open a file into it
+file.open('file.txt');
+std::string line;
+while (std::getline(file, line)) {
+	cout &lt;&lt; line;
+}
+</code></pre>
+<p>First we open a file. In the loop body, we print each line to STDOUT. In the loop condition, we take advtange of the fact that <code>std::getline</code> returns <code>false</code> when all lines from the file have been read.</p>
+<h4>Check Your Understanding</h4>
+<p>What do you think the following code does?</p>
+<pre><code class="language-cpp">while (true) {
+	cout &lt;&lt; &quot;ad infinitum&quot;;
+}
+</code></pre>
+<h3>the <code>do-while</code> loopp</h3>
+<p>The <code>do-while</code> is very similar to the <code>while</code>, except that its code block gets executed <em>before</em> the loop condition is evaluated. This is useful because sometimes we may want to ensure that the body of the loop is executed at least once.</p>
+<pre><code class="language-cpp">// set max to a random number from 0 to 9
+uint max = rand() % 10;
+uint x = 3;
+do {
+	cout &lt;&lt; x;
+	x++;
+}while (x &lt;= max)
+</code></pre>
+<p>In this case, it is possible that <code>x &lt;= max</code> before our loop executes. Using <code>do-while</code> instead of <code>while</code> ensures that the value <code>3</code> is always sent to STDOUT at least once.</p>
+<h4>Check your understanding</h4>
+<p>What do you think the following code does?</p>
+<pre><code class="language-cpp">while (false) {
+	cout &lt;&lt; 'do you see me?';
+}
+do {
+	cout &lt;&lt; 'how about me?';
+}while (false)
+</code></pre>
+<h3>the <code>for</code> loop</h3>
+<p>A <code>for</code> loop can be used to keep track of a counter while iterating. Consider the following code:</p>
+<pre><code class="language-cpp">uint x = 0;
+while (x &lt;= 7) {
+	cout &lt;&lt; x;
+	x++;
+}
+</code></pre>
+<p>Now consider this re-write using a <code>for</code> loop:</p>
+<pre><code class="language-cpp">for (uint x=0; x&lt;=7; x++) {
+	cout &lt;&lt; x;
+}
+</code></pre>
+<p>In this case, we assign <code>0</code> to a new variable x, demand the loop exits when <code>x &lt;= 7</code>, and instruct the compiler to iterate <code>x</code> at the end of each loop iteration. Another notable feature of the <code>for</code> loop is that variable <code>x</code> is only defined for lexical scope of the loop body.</p>
+<h4>Check your understanding</h4>
+<p>What do you think the following code does?</p>
+<pre><code class="language-cpp">for (uint x=7; x&gt;=0; x--) {
+	cout &lt;&lt; x;
+}
+</code></pre>

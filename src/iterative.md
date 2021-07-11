@@ -1,8 +1,6 @@
 
 # Lesson Plan for Iterative Structures
 
-## Examples
-
 Notionally, iterative structure or "loops" describe an action is that repeated until a condition is met.
 
 There are many human examples:

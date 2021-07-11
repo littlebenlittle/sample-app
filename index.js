@@ -30,6 +30,8 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
+app.use('/content', express.static('content'))
+
 app.post('/submit', async (req, res) => {
 	const username = req.body.username;
 	try {

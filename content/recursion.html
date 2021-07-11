@@ -1,0 +1,48 @@
+<h1>Lesson Plan for Recursion</h1>
+<h3>Example 1</h3>
+<p>A recursive function is a function that makes a call to itself.</p>
+<pre><code class="language-cpp">void recurse(uint remaining) {
+	cout &lt;&lt; remaining;
+	if (remaining &gt; 0) {
+		recurse(remaining - 1);
+	}
+}
+</code></pre>
+<p>Each time this function runs, it checks if the value it recieved for <code>remaining</code> is greater than zero. If not, it calls itself with the value of <code>remaining</code> minus <code>1</code>.</p>
+<p>The output would look something like:</p>
+<pre><code>5
+4
+3
+2
+1
+0
+</code></pre>
+<h3>Example 2</h3>
+<p>Consider instead this similar recursive function:</p>
+<pre><code class="language-cpp">void recurse(uint remaining) {
+	if (remaining != 0) {
+		recurse(remaining - 1);
+	}
+	cout &lt;&lt; remaining;
+}
+</code></pre>
+<p>In this case, the recursive call is made <em>before</em> writing to STDOUT. Intead of printing the value of <code>remaining</code> and then proceeding to the next call, the next call is executed first.</p>
+<p>The output would look something like:</p>
+<pre><code>0
+1
+2
+3
+4
+5
+</code></pre>
+<h3>Check Your Understanding</h3>
+<p>What do you think this code would do?</p>
+<pre><code class="language-cpp">void recurse(uint remaining) {
+	cout &lt;&lt; remaining;
+	recurse(remaining - 1);
+}
+</code></pre>
+<h2>Tail recursion vs General Recursion</h2>
+<p>In the second example, the recursive call is made before the end of the function. The compiler can't be certain that local variables used by the function do not need to be accessed later on in the function block. Therefore each successive call needs to have its own memory allocated for local variables. This process of expanding a sequence of function calls is known as a callstack. This is what's known as <strong>general recursion</strong>, where the recursive call is made anywhere inside the function block.</p>
+<p>In the first example, though, the recursive call is made at the end of the function block. This means that there are no more statements to execute in that block and the memory allocated to local variables can be released or better--reused! Indeed, the compiler can reuse the local variables in the function block, meaning the callstack, and therefore memory usage, does not increase. Placing the recursive call at the end of the function block is known as <strong>tail recursion</strong> and allows for this powerful compiler optimization.</p>
+<p>In practice, general recursive functions are more likely to cause the program to run out of memory. If tail recursion is possible for your function, you should usually make use of it.</p>

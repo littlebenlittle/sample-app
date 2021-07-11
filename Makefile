@@ -5,8 +5,12 @@ pages=$(CURDIR)/pages
 
 .PHONY: build serve
 
-build: clean
+build: build-md
 	@$(CURDIR)/build.sh
+
+build-md:
+	@npx markdown-it $(CURDIR)/src/iterative.md > $(CURDIR)/content/iterative.html
+	@npx markdown-it $(CURDIR)/src/recursion.md > $(CURDIR)/content/recursion.html
 
 serve:
 	@$(CURDIR)/up.sh
