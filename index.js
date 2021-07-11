@@ -26,13 +26,13 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
+app.get('/example-app', (req, res) => {
 	res.render('index');
 });
 
-app.use('/content', express.static('content'))
+app.use('/example-app/content', express.static('content'));
 
-app.post('/submit', async (req, res) => {
+app.post('/example-app/submit', async (req, res) => {
 	const username = req.body.username;
 	try {
 		const projects = await fetchProjects(username);
@@ -47,4 +47,4 @@ app.post('/submit', async (req, res) => {
 	}
 });
 
-app.listen(8080, () => { console.log('listening on 8080') });
+app.listen(process.env.PORT || 8080, () => { console.log('listening on 8080') });

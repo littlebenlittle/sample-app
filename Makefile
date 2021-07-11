@@ -1,12 +1,11 @@
 SHELL=/bin/bash
-static=$(CURDIR)/static
-source=$(CURDIR)/src
-pages=$(CURDIR)/pages
+build=$(CURDIR)/build
 
 .PHONY: build serve
 
 build: build-md
-	@$(CURDIR)/build.sh
+	@ if [ ! -d $(build) ]; then mkdir $(build); fi
+	@BUILD=$(build) $(CURDIR)/build.sh
 
 build-md:
 	@npx markdown-it $(CURDIR)/src/iterative.md > $(CURDIR)/content/iterative.html

@@ -4,7 +4,7 @@ dir=`realpath $(dirname $0)`
 
 podman pod ls | grep web >/dev/null
 if [ $? == 0 ]; then podman pod stop web; podman pod rm web; fi
-podman pod create --name web -p 8080:8080
+pod=`podman pod create --name web -p 8080:8080`
 
 pass=`head /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 32`
 
